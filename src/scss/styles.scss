@@ -1,0 +1,30 @@
+@import 'bootstrap/scss/bootstrap';
+
+:root {
+  --primary: #0039b3;
+  --secondary: #75787b;
+  --success: #198754;
+  --success-faded: rgba(25, 135, 84, 0.5);
+  --info: #1e72fe;
+  --danger: #b50c22;
+  --danger-faded: rgba(181, 12, 34, 0.5);
+  --warning: #ffc107;
+  --warning-faded: rgba(255, 193, 7, 0.5);
+  --lightfill: #f2f2f2;
+  --mediumfill: lightgray;
+  --darkfill: #1a1a1a;
+  --primary-dark: #145da0;
+  --primary-dark-faded: #145ca05f;
+}
+
+.form-element-label {
+  text-align: left;
+  .required-asterisk {
+    color: var(--danger);
+  }
+}
+.page-wrapper {
+  max-width: 900px;
+  margin: auto;
+  margin-top: 2rem;
+}
