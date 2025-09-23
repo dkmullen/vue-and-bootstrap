@@ -16,7 +16,10 @@ const formData = reactive({
   favColor: '',
   favTeam: '',
   nickName: '',
-  email: ''
+  email: '',
+  phone: '',
+  dob: '',
+  ssn: ''
 })
 
 function validate() {
@@ -48,26 +51,37 @@ onMounted(() => {
     </p>
     <div>
       <form class="needs-validation" novalidate>
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <BaseSelect label="Favorite Team" :items="teams" v-model="formData.favTeam" />
-            </div>
-            <div class="col-12 col-md-4">
-              <BaseSelect
-                label="Favorite Color"
-                :items="colors"
-                v-model="formData.favColor"
-              />
-            </div>
-            <div class="col-12 col-md-4">
-              <BaseInput label="Nickname" v-model="formData.nickName" />
-            </div>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <BaseSelect label="Favorite Team" :items="teams" v-model="formData.favTeam" />
           </div>
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <BaseInput label="Email" v-model="formData.email" type="email" :required="false" />
-            </div>
+          <div class="col-12 col-md-4">
+            <BaseSelect
+              label="Favorite Color"
+              :items="colors"
+              v-model="formData.favColor"
+            />
           </div>
+          <div class="col-12 col-md-4">
+            <BaseInput label="Nickname" id="nickname" name="nickname" v-model="formData.nickName" autocomplete="given-name" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <BaseInput label="Email" v-model="formData.email" type="email" :required="false" placeholder="you@example.com" />
+          </div>
+          <div class="col-12 col-md-4">
+            <BaseInput label="Phone" v-model="formData.phone" type="tel" :required="false" />
+          </div>
+          <div class="col-12 col-md-4">
+            <BaseInput label="DOB" v-model="formData.dob" type="datefield" :required="false" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <BaseInput label="SSN" v-model="formData.ssn" type="ssn" :required="false" />
+          </div>
+        </div>
         <div class="col-12">
           <button class="btn btn-primary" type="submit">Submit form</button>
         </div>

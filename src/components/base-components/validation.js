@@ -1,10 +1,8 @@
 export const validationRules = {
-  email: [
-    (v) =>
-      !v ||
-      /^[a-zA-Z0-9_.+&\\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(v) ||
-      'Email must be valid',
-  ],
+  email: {
+    regex: /^[a-zA-Z0-9_.+&\\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    warning: 'Email must be valid'
+  },
   ssn: [
     (v) =>
       !v ||
