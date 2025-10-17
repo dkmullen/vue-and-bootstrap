@@ -1,11 +1,8 @@
 <script setup>
-import FormComponent from './components/FormComponent.vue';
-import TableComponent from './components/TableComponent.vue';
+
 </script>
 
 <template>
-  <FormComponent />
-  <TableComponent />
+  <router-view></router-view>
 </template>
 
-<style scoped></style>
