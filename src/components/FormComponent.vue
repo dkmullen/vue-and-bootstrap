@@ -60,26 +60,30 @@ onMounted(() => {
               label="Favorite Color"
               :items="colors"
               v-model="formData.favColor"
+              :required="false"
             />
           </div>
           <div class="col-12 col-md-4">
-            <BaseInput label="Nickname" id="nickname" name="nickname" v-model="formData.nickName" autocomplete="given-name" />
+            <BaseInput label="Nickname" id="nickname" name="nickname" v-model="formData.nickName" :required="false" autocomplete="given-name" />
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-md-4">
-            <BaseInput label="Email" v-model="formData.email" type="email" :required="false" placeholder="you@example.com" />
+            <BaseInput label="Email" v-model="formData.email" type="email" placeholder="you@example.com" :required="false" />
           </div>
           <div class="col-12 col-md-4">
             <BaseInput label="Phone" v-model="formData.phone" type="tel" :required="false" />
           </div>
           <div class="col-12 col-md-4">
-            <BaseInput label="DOB" v-model="formData.dob" type="datefield" :required="false" />
+            <BaseInput label="DOB" v-model="formData.dob" type="datefield" />
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-md-4">
-            <BaseInput label="SSN" v-model="formData.ssn" type="ssn" :required="false" />
+            <BaseInput label="SSN" v-model="formData.ssn" type="ssn" />
+          </div>
+          <div class="col-12 col-md-6">
+            <BaseTextArea label="Comments" />
           </div>
         </div>
         <div class="col-12">

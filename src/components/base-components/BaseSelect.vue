@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue'
-// import { validationRules } from './validation'
 import { formFieldProps } from './shared-props'
 
 const props = defineProps({
@@ -34,5 +33,10 @@ function onChange(event) {
         {{ item.label }}
       </option>
     </select>
+    <div class="invalid-feedback">This field is required.</div>
   </div>
 </template>
+
+<!-- The Bootstrap **invalid-feedback** class is used to display an error message when a form input element
+ fails validation. The message is hidden by default and becomes visible when the associated input is in an
+ invalid state.  -->

@@ -42,4 +42,10 @@ export const validationRules = {
     },
   ],
   requiredRule: [(v) => !!v || 'This field is required.'],
+  permissive: [
+    (v) =>
+      !v ||
+      /^(?!.*[<>{}[\]`\\])(?!.*<\/?)(?!.*=>)[\p{L}\p{N}\p{P}\p{S}\p{Zs}\r\n]+$/u.test(v) ||
+      'Contains invalid characters',
+  ],
 };
