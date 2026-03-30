@@ -13,10 +13,10 @@ const isRequired = computed(() => props.required)
 const validationRule = validationRules[props.type]
 
 const typeConfig = {
-  ssn:   { hint: 'xxx-xx-xxxx', mask: { mask: '###-##-####' } },
-  tel:   { hint: 'xxx-xxx-xxxx', mask: { mask: '###-###-####' } },
-  zip:   { hint: 'xxxxx', mask: { mask: '#####' } },
-  datefield: { hint: 'MM-DD-YYYY', mask: { mask: '##-##-####' } }
+  ssn: { hint: 'xxx-xx-xxxx', mask: { mask: '###-##-####' } },
+  tel: { hint: 'xxx-xxx-xxxx', mask: { mask: '###-###-####' } },
+  zip: { hint: 'xxxxx', mask: { mask: '#####' } },
+  datefield: { hint: 'MM-DD-YYYY', mask: { mask: '##-##-####' } },
 }
 
 const { hint, mask } = typeConfig[props.type] || {}
@@ -25,7 +25,7 @@ const emit = defineEmits(['update:modelValue'])
 
 function onInput(event) {
   const value = event.target.value
-  if (value && !validationRule.regex.test(value)) {
+  if (value && !validationRule?.regex?.test(value)) {
     event.target.classList.add('is-invalid')
     event.target.setCustomValidity(validationRule.warning || 'Invalid format')
   } else {
@@ -34,7 +34,6 @@ function onInput(event) {
   }
   emit('update:modelValue', value)
 }
-
 </script>
 
 <template>

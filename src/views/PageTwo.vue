@@ -7,9 +7,9 @@ const payload = reactive([])
 function submit() {
   payload.forEach((i) => {
     if (i.file && i.docketDate) {
-      const formatted = i.docketDate.replace(/-/g, '');
+      const formatted = i.docketDate.replace(/-/g, '')
       const fileName = `DailyDkt${formatted}.pdf`
-      const renamedFile = new File([i.file], fileName, { type: i.file.type } )
+      const renamedFile = new File([i.file], fileName, { type: i.file.type })
       sendOneForm(renamedFile)
     }
   })
@@ -33,7 +33,7 @@ function deleteRow(idx) {
 }
 function setForm() {
   payload.length = 0
-  for (let i = 0; i < 3; i++ ) {
+  for (let i = 0; i < 3; i++) {
     payload.push({ file: null, docketDate: null })
   }
 }
@@ -47,33 +47,53 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container page-wrapper">
     <h1>Page Two</h1>
-      <form class="needs-validation" novalidate>
-        <div class="row" v-for="(item, index) in payload" :key="item.date">
-          <div class="col-12 col-md-4">
-            <div class="mb-3">
-              <label for="file" class="form-label">File</label>
-              <input type="file" class="form-control" id="file" v-on:change="selectFile($event, index)" accept=".pdf">
-            </div>
-          </div>
-          <div class="col-12 col-md-4">
-            <div class="mb-3">
-              <label for="date" class="form-label">Docket Date</label>
-              <input type="date" class="form-control" id="date" v-model="payload[index].docketDate">
-            </div>
-          </div>
-          <div class="col-12 col-md-4 align-self-end pb-3">
-            <button type="button" @click="deleteRow(index)" class="btn btn-danger btn-sm me-1" v-if="index > 2">Delete</button>
+    <form class="needs-validation" novalidate>
+      <div class="row" v-for="(item, index) in payload" :key="item.date">
+        <div class="col-12 col-md-4">
+          <div class="mb-3">
+            <label for="file" class="form-label">File</label>
+            <input
+              type="file"
+              class="form-control"
+              id="file"
+              v-on:change="selectFile($event, index)"
+              accept=".pdf"
+            />
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <button type="button" @click="submit" class="btn btn-primary me-1">Submit</button>
-            <button type="button" @click="setForm" class="btn btn-secondary me-1">Clear</button>
-            <button type="button" @click="addRow" class="btn btn-success me-1" :disabled="payload.length > 4">Add Row</button>
+        <div class="col-12 col-md-4">
+          <div class="mb-3">
+            <label for="date" class="form-label">Docket Date</label>
+            <input type="date" class="form-control" id="date" v-model="payload[index].docketDate" />
           </div>
         </div>
-      </form>
+        <div class="col-12 col-md-4 align-self-end pb-3">
+          <button
+            type="button"
+            @click="deleteRow(index)"
+            class="btn btn-danger btn-sm me-1"
+            v-if="index > 2"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" @click="submit" class="btn btn-primary me-1">Submit</button>
+          <button type="button" @click="setForm" class="btn btn-secondary me-1">Clear</button>
+          <button
+            type="button"
+            @click="addRow"
+            class="btn btn-success me-1"
+            :disabled="payload.length > 4"
+          >
+            Add Row
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </template>

@@ -1,12 +1,36 @@
 <script setup>
-import PaginationComponent from './PaginationComponent.vue';
+import { ref, computed, onMounted } from 'vue'
+import PaginationComponent from './PaginationComponent.vue'
 
-const tableData = [
-  { id: 1, firstName: 'Mark', lastName: 'Otto', handle: '@mdo' },
-  { id: 2, firstName: 'Jacob', lastName: 'Thornton', handle: '@fat' },
-  { id: 3, firstName: 'John', lastName: 'Doe', handle: '@social' },
-  { id: 4, firstName: 'Vince', lastName: 'Hannah', handle: '@lapd' },
-]
+const props = defineProps({
+  itemsPerPage: { type: Number, default: 5 },
+  tableData: { type: Array, default: () => [] },
+  headers: { type: Array, default: () => [] },
+})
+const currentPage = ref(1)
+const currentContents = ref([])
+
+const totalPages = computed(() => Math.ceil(props.tableData.length / props.itemsPerPage))
+
+function getPageData(page) {
+  const targetPage = Number(page)
+  if (Number.isNaN(targetPage)) return
+
+  const clamped = Math.max(1, Math.min(targetPage, totalPages.value))
+  currentPage.value = clamped
+
+  const start = (clamped - 1) * props.itemsPerPage
+  const end = start + props.itemsPerPage
+  currentContents.value = props.tableData.slice(start, end)
+}
+
+function handlePageChange(page) {
+  getPageData(page)
+}
+
+onMounted(() => {
+  getPageData(currentPage.value)
+})
 </script>
 <template>
   <div class="page-wrapper">
@@ -14,23 +38,23 @@ const tableData = [
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th v-for="header in headers" :key="header.value">{{ header.text }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in tableData" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.firstName }}</td>
-            <td>{{ item.lastName }}</td>
-            <td>{{ item.handle }}</td>
+          <tr v-for="item in currentContents" :key="item.id">
+            <td v-for="header in headers" :key="header.value">{{ item[header.value] }}</td>
           </tr>
         </tbody>
       </table>
       <div class="row">
-        <div class="col-12 pagination-row"><PaginationComponent :totalPages="6" :currentPageOnLoad="4" /></div>
+        <div class="col-12 pagination-row">
+          <PaginationComponent
+            :totalPages="totalPages"
+            :currentPageOnLoad="currentPage"
+            @update:currentPage="handlePageChange"
+          />
+        </div>
       </div>
     </div>
   </div>

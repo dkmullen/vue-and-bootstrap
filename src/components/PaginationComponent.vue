@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from "vue"
+import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({
   currentPageOnLoad: Number,
@@ -30,7 +30,7 @@ const pages = computed(() => {
       if (i - l === 2) {
         rangeWithDots.push(l + 1) // just one skipped, insert it
       } else if (i - l !== 1) {
-        rangeWithDots.push("...") // multiple skipped
+        rangeWithDots.push('...') // multiple skipped
       }
     }
     rangeWithDots.push(i)
@@ -40,13 +40,17 @@ const pages = computed(() => {
   return rangeWithDots
 })
 
+const emit = defineEmits(['update:currentPage'])
+
 function goToPage(page) {
-  if (page === "..." || page < 1 || page > props.totalPages) return
+  if (page === '...' || page < 1 || page > props.totalPages) return
   currentPage.value = page
+  emit('update:currentPage', page)
 }
 
 onMounted(() => {
-  currentPage.value = props.currentPageOnLoad
+  currentPage.value = props.currentPageOnLoad || 1
+  emit('update:currentPage', currentPage.value)
 })
 </script>
 
@@ -55,9 +59,7 @@ onMounted(() => {
     <ul class="pagination">
       <!-- Previous -->
       <li :class="['page-item', { disabled: currentPage === 1 }]">
-        <a href="#" class="page-link" @click.prevent="goToPage(currentPage - 1)">
-          Previous
-        </a>
+        <a href="#" class="page-link" @click.prevent="goToPage(currentPage - 1)"> Previous </a>
       </li>
 
       <!-- Page numbers & ellipses -->
@@ -66,22 +68,15 @@ onMounted(() => {
         :key="index"
         :class="['page-item', { active: page === currentPage, disabled: page === '...' }]"
       >
-        <a
-          v-if="page !== '...'"
-          href="#"
-          class="page-link"
-          @click.prevent="goToPage(page)"
-        >
+        <a v-if="page !== '...'" href="#" class="page-link" @click.prevent="goToPage(page)">
           {{ page }}
         </a>
         <span v-else class="page-link">…</span>
       </li>
 
       <!-- Next -->
-      <li :class="['page-item', { disabled: currentPage === totalPages }]">
-        <a href="#" class="page-link" @click.prevent="goToPage(currentPage + 1)">
-          Next
-        </a>
+      <li :class="['page-item', { disabled: currentPage === props.totalPages }]">
+        <a href="#" class="page-link" @click.prevent="goToPage(currentPage + 1)"> Next </a>
       </li>
     </ul>
   </nav>
