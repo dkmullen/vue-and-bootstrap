@@ -56,7 +56,9 @@ function onInput(event) {
         :type="type"
         @input="onInput"
       />
-      <div class="invalid-feedback">{{ validationRule?.warning || 'Invalid value' }}</div>
+      <div class="invalid-feedback">
+        <span>{{ validationRule?.warning || 'This field is required.' }}</span>
+      </div>
     </div>
   </div>
 </template>
