@@ -19,22 +19,26 @@ const formData = reactive({
   email: '',
   phone: '',
   dob: '',
-  ssn: ''
+  ssn: '',
 })
 
 function validate() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
   // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-      form.classList.add('was-validated')
-    }, false)
+  Array.from(forms).forEach((form) => {
+    form.addEventListener(
+      'submit',
+      (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      },
+      false,
+    )
   })
 }
 onMounted(() => {
@@ -64,12 +68,25 @@ onMounted(() => {
             />
           </div>
           <div class="col-12 col-md-4">
-            <BaseInput label="Nickname" id="nickname" name="nickname" v-model="formData.nickName" :required="false" autocomplete="given-name" />
+            <BaseInput
+              label="Nickname"
+              id="nickname"
+              name="nickname"
+              v-model="formData.nickName"
+              :required="false"
+              autocomplete="given-name"
+            />
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-md-4">
-            <BaseInput label="Email" v-model="formData.email" type="email" placeholder="you@example.com" :required="false" />
+            <BaseInput
+              label="Email"
+              v-model="formData.email"
+              type="email"
+              placeholder="you@example.com"
+              :required="false"
+            />
           </div>
           <div class="col-12 col-md-4">
             <BaseInput label="Phone" v-model="formData.phone" type="tel" :required="false" />

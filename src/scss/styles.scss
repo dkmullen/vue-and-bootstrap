@@ -17,11 +17,8 @@
   --primary-dark-faded: #145ca05f;
 }
 
-.form-element-label {
-  text-align: left;
-  .required-asterisk {
-    color: var(--danger);
-  }
+.required-asterisk {
+  color: var(--danger);
 }
 .page-wrapper {
   max-width: 900px;

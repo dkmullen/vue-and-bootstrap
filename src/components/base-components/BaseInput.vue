@@ -38,16 +38,16 @@ function onInput(event) {
 
 <template>
   <div>
-    <div class="form-element-label">
+    <label class="form-label">
       <b>{{ props.label }}<span v-if="isRequired" class="required-asterisk">*</span></b>
-    </div>
-    <div class="input-group mb-3">
+    </label>
+    <div class="input-group mb-3 has-validation">
       <input
         class="form-control"
         :aria-label="props.label"
         :value="props.modelValue"
         :id="props.id"
-        :name="props.name"
+        :name="props.id"
         :required="props.required"
         :disabled="props.disabled"
         :readonly="props.readonly"
