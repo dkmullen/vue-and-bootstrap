@@ -38,7 +38,7 @@ function onInput(event) {
 
 <template>
   <div>
-    <label class="form-label">
+    <label class="form-element-label">
       <b>{{ props.label }}<span v-if="isRequired" class="required-asterisk">*</span></b>
     </label>
     <div class="input-group mb-3 has-validation">

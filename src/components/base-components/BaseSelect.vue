@@ -17,9 +17,9 @@ function onChange(event) {
 
 <template>
   <div>
-    <div class="form-element-label">
+    <label class="form-element-label">
       <b>{{ props.label }}<span v-if="isRequired" class="required-asterisk">*</span></b>
-    </div>
+    </label>
     <select
       class="form-select"
       :aria-label="props.label"
@@ -28,7 +28,7 @@ function onChange(event) {
       :name="props.name"
       :required="props.required"
       @change="onChange"
-      >
+    >
       <option v-for="item in props.items" :key="item.value" :value="item.value">
         {{ item.label }}
       </option>

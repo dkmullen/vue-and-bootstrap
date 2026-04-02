@@ -7,6 +7,12 @@ const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Features', path: '/two' },
 ]
+
+function changeTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-bs-theme')
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-bs-theme', newTheme)
+}
 </script>
 
 <template>
@@ -31,6 +37,10 @@ const navLinks = [
           </li>
         </ul>
       </div>
+      <button class="btn btn-outline-primary" @click="changeTheme">Toggle Theme</button>
+      <template>
+        <i-bi-alarm />
+      </template>
     </div>
   </nav>
 </template>
