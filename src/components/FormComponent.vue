@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, onMounted } from 'vue'
+import BaseButton from './base-components/BaseButton.vue'
 const colors = [
   { label: 'Select a color', value: null },
   { label: 'Red', value: 'red' },
@@ -41,6 +42,11 @@ function validate() {
     )
   })
 }
+
+function submitForm() {
+  console.log('Form submitted with data:', formData)
+}
+
 onMounted(() => {
   validate()
 })
@@ -104,7 +110,13 @@ onMounted(() => {
           </div>
         </div>
         <div class="col-12">
-          <button class="btn btn-primary" type="submit">Submit form</button>
+          <BaseButton
+            label="Submit Form"
+            @click="submitForm"
+            icon="floppy2"
+            type="submit"
+            color="success"
+          />
         </div>
       </form>
     </div>

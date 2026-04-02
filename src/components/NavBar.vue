@@ -1,7 +1,9 @@
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const currentTheme = ref(document.documentElement.getAttribute('data-bs-theme'))
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -9,9 +11,9 @@ const navLinks = [
 ]
 
 function changeTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-bs-theme')
-  const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+  const newTheme = currentTheme.value === 'light' ? 'dark' : 'light'
   document.documentElement.setAttribute('data-bs-theme', newTheme)
+  currentTheme.value = newTheme
 }
 </script>
 
@@ -37,10 +39,10 @@ function changeTheme() {
           </li>
         </ul>
       </div>
-      <button class="btn btn-outline-primary" @click="changeTheme">Toggle Theme</button>
-      <template>
-        <i-bi-alarm />
-      </template>
+      <div class="d-flex" @click="changeTheme" style="cursor: pointer">
+        <i-bi-brightness-high-fill v-if="currentTheme === 'dark'" />
+        <i-bi-moon-stars-fill v-else />
+      </div>
     </div>
   </nav>
 </template>

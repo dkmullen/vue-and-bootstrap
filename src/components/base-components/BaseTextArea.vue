@@ -40,12 +40,13 @@ function onInput(event) {
       :required="props.required"
       :disabled="props.disabled"
       :readonly="props.readonly"
-      :placeholder="hint ? hint : props.placeholder"
-      v-maska="mask"
-      :type="type"
+      :placeholder="props.placeholder"
       @input="onInput"
-      style="height: 100px">
+      style="height: 100px"
+    >
     </textarea>
-    <div class="invalid-feedback"><span>{{ validationRule?.warning || 'This field is required.' }}</span></div>
+    <div class="invalid-feedback">
+      <span>{{ validationRule?.warning || 'This field is required.' }}</span>
+    </div>
   </div>
 </template>
